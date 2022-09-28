@@ -46,16 +46,16 @@ public class CarItemsService {
     public List<CarItem> findAll() {
         return Lists.newArrayList(repository.findAll());
     }
-    public List<CarItem> search(SearchRequestDTO dto) {
+
+    public List<CarItem> searchByMAkerAndModel(SearchRequestDTO dto) {
         SearchRequest request = SearchUtil.buildSearchRequest(INDEX_NAME, dto);
         return searchInternal(request);
     }
 
-    public List<CarItem> search(SearchByMakerAndModel dto) {
+    public List<CarItem> searchByMAkerAndModel(SearchByMakerAndModel dto) {
         SearchRequest request = SearchUtil.buildSearchRequest(INDEX_NAME, dto.getMaker(), dto.getModel());
         return searchInternal(request);
     }
-
 
     private List<CarItem> searchInternal(SearchRequest request) {
         MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

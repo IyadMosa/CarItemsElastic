@@ -1,5 +1,6 @@
 package com.img.CarItemsElastic.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -14,7 +15,8 @@ public class CarItem {
 
     @Id
     @Field(type = FieldType.Keyword)
-    private Long id;
+    @JsonIgnore
+    private String id;
 
     @Field(type = FieldType.Long)
     private Long price;

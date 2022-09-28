@@ -8,40 +8,11 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.text.ParseException;
 import java.util.List;
 
 public class SearchUtil {
 
     private SearchUtil() {
-    }
-
-    public static SearchRequest buildSearchRequest(final String indexName,
-                                                   final String maker, final String model) {
-        try {
-
-            SearchSourceBuilder builder = new SearchSourceBuilder()
-                    .postFilter(getQueryBuilder(maker, model));
-
-            final SearchRequest request = new SearchRequest(indexName);
-            request.source(builder);
-
-            return request;
-        } catch (final Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private static QueryBuilder getQueryBuilder(final String maker, final String model) throws ParseException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder
-                .must(QueryBuilders.termsQuery("maker", maker));
-        boolQueryBuilder
-                .must(QueryBuilders.termsQuery("model", model));
-
-        return boolQueryBuilder;
-
     }
 
     public static SearchRequest buildSearchRequest(final String indexName,
@@ -93,6 +64,38 @@ public class SearchUtil {
                         QueryBuilders.matchQuery(field, dto.getSearchTerm())
                                 .operator(Operator.AND))
                 .orElse(null);
+    }
+
+
+    private static BoolQueryBuilder getQueryBuilder(final String maker, final String model) {
+        if (!StringUtils.hasLength(maker) || !StringUtils.hasLength(model)) {
+            return null;
+        }
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder
+                .must(QueryBuilders.matchQuery("maker", maker));
+        boolQueryBuilder
+                .must(QueryBuilders.matchQuery("model", model));
+
+        return boolQueryBuilder;
+    }
+
+    public static SearchRequest buildSearchRequest(final String indexName,
+                                                   final String maker, final String model) {
+        try {
+
+            SearchSourceBuilder builder = new SearchSourceBuilder()
+                    .postFilter(getQueryBuilder(maker, model));
+
+            final SearchRequest request = new SearchRequest(indexName);
+            request.source(builder);
+
+            return request;
+        } catch (final Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

@@ -30,12 +30,12 @@ public class CarItemsController {
 
     @PostMapping("/search")
     public ResponseEntity<List<CarItem>> search(@RequestBody SearchRequestDTO dto) {
-        return new ResponseEntity<>(service.search(dto), HttpStatus.FOUND);
+        return new ResponseEntity<>(service.searchByMAkerAndModel(dto), HttpStatus.FOUND);
     }
 
     @PostMapping("/search-by-maker-model")
     public ResponseEntity<List<CarItem>> searchByMakerAndModel(@RequestBody SearchByMakerAndModel dto) {
-        return new ResponseEntity<>(service.search(dto), HttpStatus.FOUND);
+        return new ResponseEntity<>(service.searchByMAkerAndModel(dto), HttpStatus.FOUND);
     }
 
 
