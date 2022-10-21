@@ -69,7 +69,9 @@ public class CarItemsService {
             List<CarItem> items = new ArrayList<>();
             for (SearchHit hit : searchHits) {
                 try {
-                    items.add(MAPPER.readValue(hit.getSourceAsString(), CarItem.class));
+                    CarItem item = MAPPER.readValue(hit.getSourceAsString(), CarItem.class);
+                    item.setId(hit.getId());
+                    items.add(item);
                 } catch (JsonProcessingException e) {
                     continue;
                 }

@@ -14,8 +14,7 @@ import static com.img.CarItemsElastic.helper.Constants.INDEX_NAME;
 public class CarItem {
 
     @Id
-    @Field(type = FieldType.Keyword)
-    @JsonIgnore
+    @Field(type = FieldType.Text)
     private String id;
 
     @Field(type = FieldType.Long)
