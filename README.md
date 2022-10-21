@@ -11,29 +11,17 @@
    4. then run the application "elasticsearch"
    5. then from browser got to URL "http://localhost:9200/" to make its up and running
 
-2. Swagger
+2. ### Swagger
+   #### connection:   
    http://localhost:8086/swagger-ui.html#
 
+3. ### Elasticsearch header extension
+   Need to add Elasticsearch head chrome extension
+   #### Connection: 
+   http://localhost:9200
 
 ## Clone
 
 To clone this project:
 
 `git clone https://github.com/IyadMosa/CarItemsElastic.git`
-
-## Installation
-
-`cd` into the webui_components folder
-
-`cd webui_components`
-
-Install global dependencies
-
-`npm i`
-
-Install Monorepo dependencies
-
-`npm run install-monorepo`
-## Overview
-You have 2 main apps in this monorepo.
-`formatter` and `webui_visr`. Each one has the docs for helping you to get started with.
