@@ -79,7 +79,7 @@ public class SearchUtil {
                 .must(QueryBuilders.matchQuery("model", model));
         if (StringUtils.hasLength(year)) {
             boolQueryBuilder
-                    .must(QueryBuilders.matchQuery("year", model));
+                    .must(QueryBuilders.matchQuery("year", year));
         }
 
         return boolQueryBuilder;
