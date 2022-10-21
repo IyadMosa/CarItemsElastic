@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.img.CarItemsElastic.document.CarItem;
 import com.img.CarItemsElastic.repository.CarItemsRepository;
-import com.img.CarItemsElastic.search.SearchByMakerAndModel;
 import com.img.CarItemsElastic.search.SearchRequestDTO;
 import com.img.CarItemsElastic.service.util.SearchUtil;
 import org.elasticsearch.action.search.SearchRequest;
@@ -16,6 +15,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import search.SearchByMakerAndModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class CarItemsService {
     }
 
     public List<CarItem> searchByMAkerAndModel(SearchByMakerAndModel dto) {
-        SearchRequest request = SearchUtil.buildSearchRequest(INDEX_NAME, dto.getMaker(), dto.getModel());
+        SearchRequest request = SearchUtil.buildSearchRequest(INDEX_NAME, dto.getMaker(), dto.getModel(), dto.getYear());
         return searchInternal(request);
     }
 
