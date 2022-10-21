@@ -67,7 +67,7 @@ public class SearchUtil {
     }
 
 
-    private static BoolQueryBuilder getQueryBuilder(final String maker, final String model) {
+    private static BoolQueryBuilder getQueryBuilder(final String maker, final String model, final String year) {
         if (!StringUtils.hasLength(maker) || !StringUtils.hasLength(model)) {
             return null;
         }
@@ -77,16 +77,20 @@ public class SearchUtil {
                 .must(QueryBuilders.matchQuery("maker", maker));
         boolQueryBuilder
                 .must(QueryBuilders.matchQuery("model", model));
+        if (StringUtils.hasLength(year)) {
+            boolQueryBuilder
+                    .must(QueryBuilders.matchQuery("year", model));
+        }
 
         return boolQueryBuilder;
     }
 
     public static SearchRequest buildSearchRequest(final String indexName,
-                                                   final String maker, final String model) {
+                                                   final String maker, final String model, final String year) {
         try {
 
             SearchSourceBuilder builder = new SearchSourceBuilder()
-                    .postFilter(getQueryBuilder(maker, model));
+                    .postFilter(getQueryBuilder(maker, model, year));
 
             final SearchRequest request = new SearchRequest(indexName);
             request.source(builder);
