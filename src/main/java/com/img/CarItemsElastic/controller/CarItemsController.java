@@ -44,5 +44,8 @@ public class CarItemsController {
         return new ResponseEntity<>(service.findAll(), HttpStatus.FOUND);
     }
 
-
+    @PostMapping("/get-by-ids")
+    public ResponseEntity<List<CarItem>> getAllByIds(@RequestBody List<String> ids) {
+        return new ResponseEntity<>(service.getAllByIds(ids), HttpStatus.FOUND);
+    }
 }

@@ -84,4 +84,12 @@ public class CarItemsService {
     }
 
 
+    public List<CarItem> getAllByIds(List<String> ids) {
+        List<CarItem> items = new ArrayList<>();
+        ids.forEach(id->{
+            CarItem item = repository.findById(id).get();
+            items.add(item);
+        });
+        return items;
+    }
 }
